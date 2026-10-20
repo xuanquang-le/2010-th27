@@ -159,7 +159,14 @@
     dialog.scrollTop = 0;
   }
 
-  document.addEventListener('bouquet:ready', () => { openButton.hidden = false; });
+  document.addEventListener('bouquet:ready', () => {
+    openButton.hidden = false;
+    // Coming back from the garden ("Quay lại thiệp") opens the card straight away.
+    if (location.hash === '#thiep') {
+      history.replaceState(null, '', location.pathname + location.search);
+      setCardOpen(true);
+    }
+  });
   document.addEventListener('bouquet:rose', event => {
     const wish = document.getElementById('roseWish');
     wish.classList.remove('is-new');
